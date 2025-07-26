@@ -20,15 +20,17 @@
 ## 安装方法
 
 1. 安装依赖：
+   
    ```bash
    pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
    ```
    
    或手动安装：
+   
    ```bash
    pip install selenium rich toml
    ```
-2. 下载并配置 Edge WebDriver，确保版本与本地 Edge 浏览器一致。
+2. 下载并配置 [**Edge WebDriver**](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/?form=MA13LH)，确保版本与本地 Edge 浏览器一致。
 3. 配置 `config.toml`（参考下方配置说明）。
 4. Windows 用户可直接双击 `run.cmd` 启动。
 
