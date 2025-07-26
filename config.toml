@@ -1,0 +1,45 @@
+# 弹幕池一号权重（决定与二号池的发送概率）
+[danmu]
+# 每条弹幕发送的间隔时间中间值（秒）
+interval = 5
+# 弹幕发送间隔浮动值（秒），如 interval_float=2，则每次间隔为 interval±interval_float
+interval_float = 2
+# 弹幕池一号权重
+pool_weight = 7
+# 弹幕内容列表，可自定义多条内容，按顺序循环发送
+contents = [
+    "家人们欢迎来到直播间",  # 示例弹幕1        
+    "主播幸苦了",# 示例弹幕2
+    "点击下面团字就可以下单了。点进页面上拉一下就可以看到离你最近的门店。"# 示例弹幕3
+]
+
+[danmu_pool2]
+# 弹幕池二号，格式为 [[content="内容", weight=权重], ...]
+# 权重越高被抽中的概率越大
+pool_weight = 1
+pool = [
+    { content = "感谢各位老铁下单支持", weight = 3 },
+    { content = "老铁们，有不清楚打在公屏上", weight = 2 },
+    { content = "喜欢主播点个赞", weight = 1 }
+]
+# config.toml
+# 快手弹幕机器人全局配置
+
+
+[account]
+# 是否复用本地Edge浏览器已登录状态（true为复用，false为每次自动登录）该功能暂时无效
+reuse_local_login = false
+# 快手账号用户名（手机号或邮箱），仅在不复用时需要。该功能暂时无效，请扫码登录
+username = ""
+# 快手账号密码，仅在不复用时需要该功能暂时无效，请扫码登录
+password = ""
+# Edge浏览器驱动的绝对路径，例如：C:/driver/msedgedriver.exe
+edgedriver_path = ""
+# Edge用户数据目录路径，仅在复用本地登录时需要，例如：C:/Users/你的用户名/AppData/Local/Microsoft/Edge/User Data。该功能暂时无效
+user_data_dir = ""
+
+[live]
+# 直播间链接，需替换为目标直播间的真实URL
+room_url = "https://live.kuaishou.com/u/xxxxxxx"  # 替换为实际直播间链接
+
+
