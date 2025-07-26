@@ -23,6 +23,7 @@
    ```bash
    pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
    ```
+   
    或手动安装：
    ```bash
    pip install selenium rich toml
@@ -68,7 +69,7 @@ pool = [
 
 ## 运行截图
 
-> ![终端美化示例](https://user-images.githubusercontent.com/your_screenshot.png)
+> ![终端截图](images/README/1753539874410.png)
 
 ## 常见问题
 
@@ -85,3 +86,4 @@ pool = [
 ---
 
 > 本项目仅供学习与交流，严禁用于任何违法用途。
+
