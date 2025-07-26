@@ -231,10 +231,12 @@ def load_config(path="config.toml"):
         pool2_weight = config["danmu_pool2"].get("pool_weight", 1)
         if "pool" in config["danmu_pool2"]:
             danmu_pool2 = config["danmu_pool2"]["pool"]
-    return username, password, edgedriver_path, room_url, danmu_list, interval, interval_float, reuse_local_login, user_data_dir, danmu_pool2, pool1_weight, pool2_weight
+    # 新增：自动刷新开关
+    auto_refresh_on_fail = config.get("feature", {}).get("auto_refresh_on_fail", False)
+    return username, password, edgedriver_path, room_url, danmu_list, interval, interval_float, reuse_local_login, user_data_dir, danmu_pool2, pool1_weight, pool2_weight, auto_refresh_on_fail
 
 if __name__ == '__main__':
-    username, password, edgedriver_path, room_url, danmu_list, interval, interval_float, reuse_local_login, user_data_dir, danmu_pool2, pool1_weight, pool2_weight = load_config()
+    username, password, edgedriver_path, room_url, danmu_list, interval, interval_float, reuse_local_login, user_data_dir, danmu_pool2, pool1_weight, pool2_weight, auto_refresh_on_fail = load_config()
     bot = KuaishouDanmuBot(
         username=username,
         password=password,
@@ -310,6 +312,7 @@ if __name__ == '__main__':
             '//div[contains(@class, "danmaku-send") or contains(@class, "send-btn") or contains(@class, "sendButton")]',
             '//span[contains(text(), "发送")]/ancestor::button',
         ]
+        consecutive_fail = 0
         while True:
             danmu_info = next(danmu_gen)
             danmu = danmu_info.get("content", "")
@@ -329,6 +332,7 @@ if __name__ == '__main__':
                 extra = f"[循环第{loop}轮/共{total}条/当前第{idx}条]"
             elif pool == 2:
                 extra = f"[共{total}条/当前第{idx}条]"
+            success = False
             for attempt in range(1, max_retry+1):
                 try:
                     input_box = None
@@ -388,6 +392,7 @@ if __name__ == '__main__':
                         self.console.print(msg)
                         self.logger.info(f"弹幕[{pool_str}]{extra}: {danmu}")
                         time.sleep(real_interval)
+                        success = True
                         break
                     else:
                         raise Exception("弹幕未成功发出，输入框内容未清空")
@@ -400,6 +405,17 @@ if __name__ == '__main__':
                     else:
                         self.console.print("[yellow]准备重试...[/yellow]")
                         time.sleep(2)
+            if success:
+                consecutive_fail = 0
+            else:
+                consecutive_fail += 1
+                # 检查是否需要自动刷新
+                if auto_refresh_on_fail and consecutive_fail >= 3:
+                    self.console.print("[bold red]检测到连续三条弹幕均发送失败，自动刷新直播间...[/bold red]")
+                    self.logger.warning("连续三条弹幕均发送失败，自动刷新直播间")
+                    self.driver.refresh()
+                    time.sleep(10)
+                    consecutive_fail = 0
     import types
     bot.send_danmu = types.MethodType(send_danmu_mix, bot)
     bot.run(room_url, danmu_list)

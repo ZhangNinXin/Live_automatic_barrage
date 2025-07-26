@@ -42,4 +42,6 @@ user_data_dir = ""
 # 直播间链接，需替换为目标直播间的真实URL
 room_url = "https://live.kuaishou.com/u/xxxxxxx"  # 替换为实际直播间链接
 
-
+[feature]
+#当检测到连续三条弹幕均发送失败后，直接刷新直播间，等待10S后继续发送弹幕，若后续仍旧失败，则继续刷新。
+auto_refresh_on_fail = true
