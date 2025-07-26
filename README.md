@@ -8,7 +8,7 @@
 
 ## 主要特性
 
-- [x] 支持扫码/本地 Edge 浏览器复用登录
+- [ ] 支持扫码/本地 Edge 浏览器复用登录
 - [x] 进入直播间自动重试与人工确认
 - [x] 多弹幕池（顺序/随机/权重混合）
 - [x] 弹幕池一号进度持久化
@@ -16,6 +16,7 @@
 - [x] rich 终端美化输出，日志详细
 - [x] 全局 config.toml 配置
 - [x] run.cmd 一键启动，自动设置终端 UTF-8
+- [x] **自动防护：连续三条弹幕均发送失败时自动刷新直播间**（可配置开关）
 
 ## 安装方法
 
@@ -59,6 +60,10 @@ pool = [
   { content = "快手最强弹幕", weight = 2 },
   { content = "互动走一波", weight = 1 }
 ]
+
+[feature]
+# 自动防护：连续三条弹幕均发送失败时自动刷新直播间
+auto_refresh_on_fail = true
 ```
 
 ## 使用方法
@@ -78,6 +83,7 @@ pool = [
 - rich 未安装：请用 `pip install rich` 安装
 - Edge 驱动版本不符：请确保 msedgedriver.exe 与本地 Edge 浏览器版本一致
 - 页面结构变动导致弹幕无法发送：可适当调整 XPATH 或反馈 issue
+- 自动刷新功能未生效：请确认 `[feature] auto_refresh_on_fail = true` 并重启脚本
 
 ## 鸣谢
 
