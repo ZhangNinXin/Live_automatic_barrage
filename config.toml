@@ -8,8 +8,10 @@ interval_float = 2
 pool_weight = 7
 # 弹幕内容列表，可自定义多条内容，按顺序循环发送
 contents = [
-    "家人们欢迎来到直播间",  # 示例弹幕1        
-    "主播幸苦了",# 示例弹幕2
+    "家人们欢迎来到直播间",  # 示例弹幕1        # 示例弹幕2
+    "不办卡，没有任何隐形消费，随时可退，过期自动到账。家人们放心拍。",
+    "全国连锁门店，无论在哪个城市都可以去当地的门店享受服务。" ,
+    "欢迎进入直播间的老铁们，进来的老铁们点点赞，点点关注，祝你福财无数！",
     "点击下面团字就可以下单了。点进页面上拉一下就可以看到离你最近的门店。"# 示例弹幕3
 ]
 
@@ -27,20 +29,20 @@ pool = [
 
 
 [account]
-# 是否复用本地Edge浏览器已登录状态（true为复用，false为每次自动登录）该功能暂时无效
-reuse_local_login = false
-# 快手账号用户名（手机号或邮箱），仅在不复用时需要。该功能暂时无效，请扫码登录
-username = ""
-# 快手账号密码，仅在不复用时需要该功能暂时无效，请扫码登录
-password = ""
+# 是否复用本地Edge浏览器已登录状态（true为复用，false为每次自动登录）
+reuse_local_login = true
+# 快手账号用户名（手机号或邮箱），仅在不复用时需要
+username = "19211439414"
+# 快手账号密码，仅在不复用时需要
+password = "your_password"
 # Edge浏览器驱动的绝对路径，例如：C:/driver/msedgedriver.exe
-edgedriver_path = ""
-# Edge用户数据目录路径，仅在复用本地登录时需要，例如：C:/Users/你的用户名/AppData/Local/Microsoft/Edge/User Data。该功能暂时无效
-user_data_dir = ""
+edgedriver_path = "C:/kuaishou/edgedriver_win64/msedgedriver.exe"
+# Edge用户数据目录路径，仅在复用本地登录时需要，例如：C:/Users/你的用户名/AppData/Local/Microsoft/Edge/User Data
+user_data_dir = "C:/Users/86131/AppData/Local/Microsoft/Edge/User Data"
 
 [live]
 # 直播间链接，需替换为目标直播间的真实URL
-room_url = "https://live.kuaishou.com/u/xxxxxxx"  # 替换为实际直播间链接
+room_url = "https://live.kuaishou.com/u/3xt8e83tvyrmzv9"
 
 [feature]
 #当检测到连续三条弹幕均发送失败后，直接刷新直播间，等待10S后继续发送弹幕，若后续仍旧失败，则继续刷新。

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>快手弹幕机器人配置</title>
+  <link rel="stylesheet" href="config_UI.css">
+  <script src="config_UI.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h2>快手弹幕机器人配置</h2>
+    <form id="configForm">
+      <fieldset>
+        <legend>账号设置</legend>
+        <label>用户名：<input type="text" name="account.username" disabled></label>
+        <label>密码：<input type="password" name="account.password" disabled></label>
+        <label>Edge驱动路径：<input type="text" name="account.edgedriver_path"></label>
+        <label>复用本地登录：<input type="checkbox" name="account.reuse_local_login" disabled></label>
+        <label>用户数据目录：<input type="text" name="account.user_data_dir" disabled></label>
+        <div style="color:#f56c6c;font-size:14px;margin-top:8px;">需手动扫码或验证码登录账号，自动化仅支持驱动路径配置，其余请手动登录。</div>
+      </fieldset>
+      <fieldset>
+        <legend>直播间</legend>
+        <label>直播间链接：<input type="text" name="live.room_url"></label>
+      </fieldset>
+      <fieldset>
+        <legend>弹幕池一号</legend>
+        <label>发送间隔(s)：<input type="number" name="danmu.interval" min="0"></label>
+        <label>间隔浮动(s)：<input type="number" name="danmu.interval_float" min="0"></label>
+        <label>池一权重：<input type="number" name="danmu.pool_weight" min="1"></label>
+        <div class="danmu-row">
+          <span>弹幕内容：</span>
+          <button type="button" id="editDanmuBtn" class="edit-btn">配置</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>弹幕池二号</legend>
+        <label>池二权重：<input type="number" name="danmu_pool2.pool_weight" min="1"></label>
+        <div class="danmu-row">
+          <span>弹幕内容及权重：</span>
+          <button type="button" id="editDanmu2Btn" class="edit-btn">配置</button>
+        </div>
+      </fieldset>
+    <!-- 弹幕池一号弹窗卡片 -->
+    <div class="danmu-card" id="danmuCard">
+      <div class="danmu-card-main">
+        <div class="danmu-card-toolbar">
+          <button type="button" id="danmuCardAdd" class="add-btn" title="添加弹幕">添加</button>
+          <button type="button" id="danmuCardCancel" class="close-btn" title="关闭">关闭</button>
+        </div>
+        <div class="danmu-card-title">弹幕池一号内容配置</div>
+        <div class="danmu-card-body" id="danmuCardBody"></div>
+        <div class="danmu-card-footer">
+          <button type="button" id="danmuCardSave" class="save-btn">保存</button>
+        </div>
+      </div>
+    </div>
+    <!-- 弹幕池二号弹窗卡片 -->
+    <div class="danmu-card" id="danmu2Card">
+      <div class="danmu-card-main">
+        <div class="danmu-card-toolbar">
+          <button type="button" id="danmu2CardAdd" class="add-btn" title="添加弹幕">添加</button>
+          <button type="button" id="danmu2CardCancel" class="close-btn" title="关闭">关闭</button>
+        </div>
+        <div class="danmu-card-title">弹幕池二号内容配置</div>
+        <div class="danmu-card-body" id="danmu2CardBody"></div>
+        <div class="danmu-card-footer">
+          <button type="button" id="danmu2CardSave" class="save-btn">保存</button>
+        </div>
+      </div>
+    </div>
+      <fieldset>
+        <legend>功能开关</legend>
+        <label><input type="checkbox" name="feature.auto_refresh_on_fail"> 连续三条弹幕失败自动刷新直播间</label>
+      </fieldset>
+      <div class="btn-group">
+        <button type="button" id="loadBtn">读取配置</button>
+        <button type="submit">保存配置</button>
+      </div>
+      <div id="msg"></div>
+    </form>
+  </div>
+</body>
+</html>

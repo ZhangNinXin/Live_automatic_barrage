@@ -409,11 +409,11 @@ if __name__ == '__main__':
                 consecutive_fail = 0
             else:
                 consecutive_fail += 1
-                # 检查是否需要自动刷新
+                # 检查是否需要自动重进直播间
                 if auto_refresh_on_fail and consecutive_fail >= 3:
-                    self.console.print("[bold red]检测到连续三条弹幕均发送失败，自动刷新直播间...[/bold red]")
-                    self.logger.warning("连续三条弹幕均发送失败，自动刷新直播间")
-                    self.driver.refresh()
+                    self.console.print("[bold red]检测到连续三条弹幕均发送失败，自动重新进入直播间...[/bold red]")
+                    self.logger.warning("连续三条弹幕均发送失败，自动重新进入直播间")
+                    self.driver.get(room_url)
                     time.sleep(10)
                     consecutive_fail = 0
     import types
